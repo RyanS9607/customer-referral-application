@@ -4,7 +4,7 @@ import axios from 'axios';
 function ReferAFriend() {
     //Due to restrictions in AWS, this Boolean field must be manually set. However, for a live system, this field would ideally use the email of the logged-in user as the state.
   const [referrersEmail] = useState('ryan.e.sutcliffe@gmail.com'); 
-  const [newCustomerEmail, setNewCustomerEmail] = useState('ryans6atfc@gmail.com'); 
+  const [newCustomerEmail, setNewCustomerEmail] = useState(''); 
 
   
   const handleSubmit = async (e) => {
