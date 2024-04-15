@@ -1,14 +1,21 @@
 import './App.css';
-import ReferAFriend from './ components/ReferAFriend';
-import ValidateReferral from './ components/ValidateReferral';
-
 import React from 'react';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import Layout  from './Routes';
+
+
+
 
 function App() {
   return (
     <div className="App">
-      <ReferAFriend/>
-      <ValidateReferral/>
+      <Header/>
+      <br/>
+        <Layout/>
+      <br/>
+      <Footer/>
+    <br/>
     </div>
   );
 }

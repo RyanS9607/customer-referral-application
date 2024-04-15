@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import InputField from '../InputField/InputField';
+
 
 function ReferAFriend() {
     //Due to restrictions in AWS, this Boolean field must be manually set. However, for a live system, this field would ideally use the email of the logged-in user as the state.
@@ -33,20 +35,15 @@ function ReferAFriend() {
   };
 
   return (
-    <form onSubmit={handleSubmit}> 
-        
-      <br />
-      <label>
-        New Customer's Email:
-        <input
-          type="email"
-          value={newCustomerEmail} 
-          onChange={(e) => setNewCustomerEmail(e.target.value)} 
-          required 
-        />
-      </label>
-      <button type="submit">Submit</button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <label>New Customers Email:
+        <InputField value={newCustomerEmail} onChange={(e) => setNewCustomerEmail(e.target.value)} />
+        <br />
+        <button type="submit">Submit</button>
+        </label>
+      </form>
+    </>
   );
 }
 
