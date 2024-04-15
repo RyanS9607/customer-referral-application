@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import InputField from '../InputField/InputField';
 
 function ValidateReferral() {
   
-  const [referrersEmail, setRerrersEmail] = useState(''); 
+  const [referrersEmail, setReferrersEmail] = useState(''); 
 
   //Due to restrictions in AWS, this Boolean field must be manually set. However, for a live system, this field would ideally use the email of the logged-in user as the state.
   const [newCustomerEmail] = useState('ryans6atfc@gmail.com'); 
@@ -34,21 +35,15 @@ function ValidateReferral() {
   };
 
   return (
-    <form onSubmit={handleSubmit}> 
-        
-      <br />
-      <label>
-      Referrers Email:
-        <input
-          type="email"
-          value={referrersEmail} 
-          onChange={(e) => setRerrersEmail(e.target.value)} 
-          required 
-        />
-      </label>
-      <br />
-      <button type="submit">Submit</button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <label>Referrers Email:
+        <InputField value={referrersEmail} onChange={(e) => setReferrersEmail(e.target.value)} />
+        <br />
+        <button type="submit">Submit</button>
+        </label>
+      </form>
+    </>
   );
 }
 
