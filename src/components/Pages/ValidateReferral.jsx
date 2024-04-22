@@ -39,10 +39,10 @@ function ValidateReferral() {
     <div className='BodyContainer'>
       <form onSubmit={handleSubmit}>
         <InputField value={referrersEmail} onChange={(e) => setReferrersEmail(e.target.value)} />
-      </form>
         <div className='ButtonContainer'>
-          <Button variant="contained" color="success">Submit</Button>
+          <Button type='submit' variant="contained" color="success">Submit</Button>
         </div>
+      </form>
     </div>
   );
 }

@@ -39,10 +39,10 @@ function ReferAFriend() {
     <div className='BodyContainer'>
       <form onSubmit={handleSubmit}>
         <InputField value={newCustomerEmail} onChange={(e) => setNewCustomerEmail(e.target.value)} />
-      </form>
-        <div>
-          <Button variant="contained" color="success">Submit</Button>
+        <div className='ButtonContainer'>
+          <Button type="submit" variant="contained" color="success">Submit</Button>
         </div>
+      </form>
     </div>
   );
 }
