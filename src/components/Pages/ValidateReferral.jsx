@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import InputField from '../InputField/InputField';
+import Button from '@mui/material/Button';
 
 function ValidateReferral() {
   
@@ -35,15 +36,14 @@ function ValidateReferral() {
   };
 
   return (
-    <>
+    <div className='BodyContainer'>
       <form onSubmit={handleSubmit}>
-        <label>Referrers Email:
         <InputField value={referrersEmail} onChange={(e) => setReferrersEmail(e.target.value)} />
-        <br />
-        <button type="submit">Submit</button>
-        </label>
       </form>
-    </>
+        <div className='ButtonContainer'>
+          <Button variant="contained" color="success">Submit</Button>
+        </div>
+    </div>
   );
 }
 

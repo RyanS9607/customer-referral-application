@@ -1,13 +1,133 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: -apple-system, 
+    Arial, sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Footer CSS */
+.FooterContainer {
+  background-color: rgb(228, 236, 239);
+  color: rgb(60, 60, 60);
+  padding: 15px 16px 20px;
+}
+
+.FooterContentContainer {
+  display: flex;
+}
+
+.SaferGamblingShieldContainer {
+  padding-top: 18px;
+  width: 35px;
+}
+
+.FooterText {
+  text-align: left;
+}
+
+.FooterImages {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.FooterImages a {
+  color: transparent;
+  background-repeat: no-repeat;
+  margin: 5px;
+  line-height: 24px;
+}
+
+.SaferGamblingShieldContainer{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.SaferGamblingShield {
+  background-image: url(https://static.skybetservices.com/core-static-assets/safergambling.svg);
+  color: transparent;
+  background-repeat: no-repeat;
+  height: 25px;
+  width: 30px;
+}
+
+.BeGambleAware {
+  background-image: url(https://static.skybetservices.com/core-static-assets/begambleaware.svg);
+  height: 11px;
+  width: 82px;
+}
+
+.GamCare {
+  background-image: url(https://static.skybetservices.com/core-static-assets/gamcare-v2.svg);
+  height: 28px;
+  width: 94px;
+}
+
+.Gamstop {
+  background-image: url(https://static.skybetservices.com/core-static-assets/gamstop-logo.svg);
+  height: 14px;
+  width: 77px;
+}
+
+.GordonMoody {
+  background-image: url(https://static.skybetservices.com/core-static-assets/gordonmoody.svg);
+  height: 30px;
+  width: 78px;
+}
+
+.SaferGamblingStandard {
+  background-image: url(https://static.skybetservices.com/core-static-assets/safergamblingstandard.svg);
+  height: 26px;
+  width: 24px;
+}
+
+.GamBan {
+  background-image: url(https://static.skybetservices.com/core-static-assets/gamban-landscape.svg);
+  height: 21.16px;
+  width: 70.09px;
+}
+
+.EighteenPlus {
+  background-image: url(https://static.skybetservices.com/core-static-assets/18plus.svg);
+  height: 27px;
+  width: 27px;
+}
+
+.TimeToThink {
+  background-image: url(https://static.skybetservices.com/core-static-assets/taketimetothink.svg);
+  height: 18px;
+  width: 119px;
+}
+
+/* Header */
+.HeaderContainer {
+  background-color: rgb(255, 255, 255);
+  border-bottom-color:rgb(180, 191, 211);
+  border-bottom-style: solid;
+  border-bottom-width: 1px ;
+  padding: 10px 5px 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.SkyBetLogo {
+  background-image: url(https://static.skybetservices.com/core-static-assets/skybet-logo-v2.png);
+  color: transparent;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 20px;
+  width: 72px;
+}
+
+/* Body CSS */
+.BodyContainer {
+   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  margin-bottom: 20px; /* Add margin to the bottom of the form */
+}
+
+.ButtonContainer {
+  margin-top: 20px; /* Add margin to the top of the button */
 }

@@ -6,22 +6,23 @@ import Button from '@mui/material/Button';
 function TempHomepage() {
  
   return (
-    <>
-    This is the homepage
-    <br/>
-    <Link to="/refernewcustomer">
-      <Button variant="contained" >
-        Refer A Friend
-      </Button>
-    </Link>
-    <br/>
-    <Link to="/verifyreferral">
-      <Button variant="contained">
-          Verify The Referral
-      </Button>
-    </Link>
-    <br/>
-    </>
+    <div className='BodyContainer'>
+      <div className='ReferNewCustomerContainer'>
+        <Link to="/refernewcustomer">
+          <Button variant="contained" color="success">
+            Refer A Friend
+          </Button>
+        </Link>
+      </div>
+      <br/>
+      <div className='VerifyReferralContainer'>
+        <Link to="/verifyreferral">
+          <Button variant="contained" color="success">
+              Verify The Referral
+          </Button>
+        </Link>
+      </div>
+    </div>
   );
 }
 
