@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import InputField from '../InputField/InputField';
+import Button from '@mui/material/Button';
 
 
 function ReferAFriend() {
@@ -35,15 +36,14 @@ function ReferAFriend() {
   };
 
   return (
-    <>
+    <div className='BodyContainer'>
       <form onSubmit={handleSubmit}>
-        <label>New Customers Email:
         <InputField value={newCustomerEmail} onChange={(e) => setNewCustomerEmail(e.target.value)} />
-        <br />
-        <button type="submit">Submit</button>
-        </label>
+        <div className='ButtonContainer'>
+          <Button type="submit" variant="contained" color="success">Submit</Button>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 
