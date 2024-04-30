@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import InputField from '../InputField/InputField';
 import Button from '@mui/material/Button';
+import Success from '../ResponseHandling/Success';
+import Error from '../ResponseHandling/Error';
 
 function ValidateReferral() {
   
   const [referrersEmail, setReferrersEmail] = useState(''); 
-
-  //Due to restrictions in AWS, this Boolean field must be manually set. However, for a live system, this field would ideally use the email of the logged-in user as the state.
   const [newCustomerEmail] = useState('ryans6atfc@gmail.com'); 
+  const [responseText, setResponseText] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
-  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault(); 
 
@@ -27,8 +28,10 @@ function ValidateReferral() {
           new_customer_email: newCustomerEmail, 
         },
       });
-
       console.log('Response:', response.data); 
+      setSubmitted(true);
+      setResponseText(JSON.stringify(response.data.body));
+      setResponseText(response.data.body.replace(/^"|"$/g, ''));
 
     } catch (error) {
       console.error('Error:', error); 
@@ -37,12 +40,28 @@ function ValidateReferral() {
 
   return (
     <div className='BodyContainer'>
-      <form onSubmit={handleSubmit}>
-        <InputField value={referrersEmail} onChange={(e) => setReferrersEmail(e.target.value)} />
-        <div className='ButtonContainer'>
-          <Button type='submit' variant="contained" color="success">Submit</Button>
-        </div>
-      </form>
+      <h2>Verify that you have been referred</h2>
+
+      <div>
+        Please enter the email address of the person who has referred you:
+      </div>
+      <br/>
+      <div className='Inputbox'>
+        {submitted ? (
+          responseText.includes("Emails match") ? (
+            <Success successMessage={responseText} />
+          ) : (
+            <Error errorMessage={responseText} />
+          )
+        ) : (
+        <form onSubmit={handleSubmit}>
+          <InputField value={referrersEmail} onChange={(e) => setReferrersEmail(e.target.value)} />
+          <div className='ButtonContainer'>
+            <Button type='submit' variant="contained" color="success">Submit</Button>
+          </div>
+        </form>
+        )}
+      </div>
     </div>
   );
 }

@@ -2,48 +2,65 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import InputField from '../InputField/InputField';
 import Button from '@mui/material/Button';
-
+import Success from '../ResponseHandling/Success';
+import Error from '../ResponseHandling/Error';
 
 function ReferAFriend() {
-    //Due to restrictions in AWS, this Boolean field must be manually set. However, for a live system, this field would ideally use the email of the logged-in user as the state.
-  const [referrersEmail] = useState('ryan.e.sutcliffe@gmail.com'); 
-  const [newCustomerEmail, setNewCustomerEmail] = useState(''); 
+  const [referrersEmail] = useState('ryan.e.sutcliffe@gmail.com');
+  const [newCustomerEmail, setNewCustomerEmail] = useState('');
+  const [responseText, setResponseText] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
-  
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault(); 
 
     try {
-      // Send a POST request to the referral endpoint
       const response = await axios({
-        method: 'POST', 
-        url: `${process.env.REACT_APP_AWS_REFERRAL_ENDPOINT}`, 
+        method: 'POST',
+        url: `${process.env.REACT_APP_AWS_REFERRAL_ENDPOINT}`,
         headers: {
           'Content-Type': 'application/json',
         },
-        // Data to be sent in the request body
         data: {
-          referrers_email: referrersEmail, 
+          referrers_email: referrersEmail,
           new_customer_email: newCustomerEmail,
         },
       });
-
-      console.log('Response:', response); 
-
+      setResponseText(JSON.stringify(response.data.body));
+      setResponseText(response.data.body.replace(/^"|"$/g, ''));
+      console.log('Response:', response);
+      setSubmitted(true);
+   
     } catch (error) {
-      console.error('Error:', error); 
+      console.error('Error:', error);
     }
   };
 
   return (
     <div className='BodyContainer'>
-      <form onSubmit={handleSubmit}>
-        <InputField value={newCustomerEmail} onChange={(e) => setNewCustomerEmail(e.target.value)} />
-        <div className='ButtonContainer'>
-          <Button type="submit" variant="contained" color="success">Submit</Button>
-        </div>
-      </form>
+      <h2>Refer a friend to Sky Betting and Gaming</h2>
+      <div>
+        Please enter the email address of the person you want to refer:
+      </div>
+        <br/>
+        <div className='Inputbox'>
+        {submitted ? (
+          responseText.includes("successfully") ? (
+            <Success successMessage={responseText} />
+          ) : (
+              <Error errorMessage={responseText} />
+            )
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <InputField value={newCustomerEmail} onChange={(e) => setNewCustomerEmail(e.target.value)} />
+            <div className='ButtonContainer'>
+              <Button type="submit" variant="contained" color="success">Submit</Button>
+            </div>
+          </form>
+        )}
+      </div>
     </div>
+    
   );
 }
 
