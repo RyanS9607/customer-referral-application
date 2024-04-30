@@ -23,7 +23,7 @@ function Footer() {
       <div className='FooterImages'> 
         <a
           className='BeGambleAware' href='https://www.begambleaware.org/' alt='Be Gamble Aware'>
-          Be Gamble Aware
+          BGA
         </a>
         <a className="GamCare" href='https://www.gamcare.org.uk/talk-to-us-now/' alt='GamCare logo'>
           GamCare
@@ -32,17 +32,17 @@ function Footer() {
           Gamstop
         </a>
         <a className="GordonMoody" href='https://www.gamblingtherapy.org/'alt='Gordon Moody logo'>
-          Gordon Moody
+          GordonMoody
         </a>
 
         <a className="SaferGamblingStandard" href='https://www.safergamblingstandard.org.uk/assured-businesses/' alt='SaferGamblingStandard logo'>
-          Safer Gambling Standard
+          SGS
         </a>
         <a className="GamBan" href='https://gamban.com/' alt='GamBan logo'>
           GamBan
         </a>
         <a className="EighteenPlus" href='https://support.skybet.com/s/article/How-old-do-I-have-to-be-to-join' alt='EighteenPlus logo'>
-          Eighteen Plus
+          18+
         </a>
         <a className="TimeToThink" href='https://www.taketimetothink.co.uk/' alt='TimeToThink logo'>
           Time To Think

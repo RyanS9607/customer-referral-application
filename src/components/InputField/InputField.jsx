@@ -8,6 +8,9 @@ function InputField({ value, onChange }) {
         type="text"
         value={value}
         onChange={onChange}
+        fullWidth= {true}
+        size="small"
+        inputProps={{min: 0, style: { textAlign: 'center' }}}
         required
       />
     </label>

@@ -4,9 +4,6 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Layout  from './Routes';
 
-
-
-
 function App() {
   return (
     <div className="App">

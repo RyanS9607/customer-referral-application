@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
 
-function TempHomepage() {
+function ReferralHomePage() {
  
   return (
     <div className='BodyContainer'>
@@ -26,4 +26,4 @@ function TempHomepage() {
   );
 }
 
-export default TempHomepage;
+export default ReferralHomePage;
