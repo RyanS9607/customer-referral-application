@@ -5,7 +5,7 @@ function InputField({ value, onChange }) {
   return (
     <label>
       <TextField
-        type="text"
+        type="email"
         value={value}
         onChange={onChange}
         fullWidth= {true}
