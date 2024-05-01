@@ -1,14 +1,28 @@
 import json
 import boto3
+import re 
 from botocore.exceptions import ClientError
 import datetime
 from datetime import datetime, timedelta
 
-# Initialize DynamoDB client
 dynamodb = boto3.client('dynamodb')
 
-# Lambda handler function
 def lambda_handler(event, context):
+
+    email_pattern = r'^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$'
+
+    if not re.match(email_pattern, event['referrers_email']):
+        return {
+            'statusCode': 400,
+            'body': json.dumps('Invalid referrer email address!')
+        }
+
+    if not re.match(email_pattern, event['new_customer_email']):
+        return {
+            'statusCode': 400,
+            'body': json.dumps('Invalid email address! Please try again and enter a Valid email Address')
+        }
+
     SENDER = 'Sky Bet <' + event['referrers_email'] + '>'
     RECIPIENT = event['new_customer_email']
     AWS_REGION = "eu-north-1"
@@ -30,11 +44,9 @@ def lambda_handler(event, context):
     SEND_EMAIL = True 
     CHARSET = "UTF-8"
     
-    # Initialize SES client
     ses = boto3.client('ses', AWS_REGION)
     
     try:
-        # Retrieve referral details from DynamoDB
         response = dynamodb.get_item(
             TableName='customer-details',
             Key={
@@ -48,7 +60,6 @@ def lambda_handler(event, context):
         currentDateTime = datetime.now() # + timedelta(days=6)  the + timedelta(days=5) is only added for testing
         print("Current Date and Time",currentDateTime)
         
-        # Calculate expired referral date
         if not item or not item.get('referral_date')['S']:
             expiredReferralDate = datetime.now() - timedelta(days=1)
         else:
@@ -56,12 +67,10 @@ def lambda_handler(event, context):
           
         print("Expired Date and Time",expiredReferralDate) 
           
-        # Check if current time is within the referral period and referral is not verified
         if currentDateTime > expiredReferralDate and item.get('referral_verified', {}).get('BOOL', False) == False :
             now = datetime.now()
             referralDate = now.strftime("%Y-%m-%dT%H:%M:%SZ")
             
-            # Update referral status in DynamoDB
             response = dynamodb.update_item(
                 TableName='customer-details',
                 Key={
@@ -77,15 +86,14 @@ def lambda_handler(event, context):
             )
             print("Item updated successfully!")
         else:
-            # If referral already exists or referral period expired, do not proceed
-            print("Customer has already referred a friend and is waiting verification or you have already referred a friend")
+            print("You have already referred a friend and are awaiting verification, or you have already referred a friend.")
             SEND_EMAIL = False
             return {
                 'statusCode': 200,
-                'body': json.dumps('Customer has already referred a friend and is waiting verification or you have already referred a friend')
+                'body': json.dumps("You have already referred a friend and are awaiting verification, or you have already referred a friend.")
             }
     except dynamodb.exceptions.ConditionalCheckFailedException:
-        # Handle if condition check fails
+   
         print("Condition check failed!")
         SEND_EMAIL = False
         return {
@@ -93,7 +101,6 @@ def lambda_handler(event, context):
             'body': json.dumps('Condition check failed!')
         }
     
-    # Send email only if referred_customer_email is empty
     if SEND_EMAIL:
         try:
             response = ses.send_email(
@@ -121,14 +128,12 @@ def lambda_handler(event, context):
                 Source=SENDER
             )
         except ClientError as e:
-            # Handle if email sending fails
             print(e.response['Error']['Message'])
             return {
                 'statusCode': 200,
-                'body': json.dumps('Email sending failed!')
+                'body': json.dumps('Email sending failed! This is us not you, please try again later')
             }
         else:
-            # If email sent successfully
             print("Email sent! Message ID:")
             print(response['MessageId'])
             return {

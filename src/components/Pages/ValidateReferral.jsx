@@ -32,6 +32,7 @@ function ValidateReferral() {
       setSubmitted(true);
       setResponseText(JSON.stringify(response.data.body));
       setResponseText(response.data.body.replace(/^"|"$/g, ''));
+      console.log(responseText)
 
     } catch (error) {
       console.error('Error:', error); 
@@ -41,7 +42,6 @@ function ValidateReferral() {
   return (
     <div className='BodyContainer'>
       <h2>Verify that you have been referred</h2>
-
       <div>
         Please enter the email address of the person who has referred you:
       </div>
