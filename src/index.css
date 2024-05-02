@@ -129,10 +129,6 @@ form {
   margin-bottom: 20px; /* Add margin to the bottom of the form */
 }
 
-.ButtonContainer {
-  margin-top: 20px; /* Add margin to the top of the button */
-}
-
 .Response {
   font-family: Arial, sans-serif;
   font-size: 16px;
@@ -165,3 +161,34 @@ form {
   justify-content: space-around;
 }
 
+.ImageContainer{
+  max-width: 100%
+}
+
+.ImageContainer img {
+  max-width: 50%;
+  max-height: 50%;
+  height: auto;
+}
+
+.ButtonContainer{
+  margin-top: 20px;
+}
+
+.ButtonContainerHomepage{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.ReferNewCustomerButton {
+  padding: 20px;
+}
+
+.VerifyReferralButton{
+  padding: 20px;
+}
+
+.TextContainer{
+  margin: 15px;
+}
