@@ -4,16 +4,19 @@ import InputField from '../InputField/InputField';
 import Button from '@mui/material/Button';
 import Success from '../ResponseHandling/Success';
 import Error from '../ResponseHandling/Error';
+import LoadingSpinner from "../InputField/LoadingSpinner";
+
 
 function ReferAFriend() {
   const [referrersEmail] = useState('ryan.e.sutcliffe@gmail.com');
   const [newCustomerEmail, setNewCustomerEmail] = useState('');
   const [responseText, setResponseText] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
-
+    e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios({
         method: 'POST',
@@ -33,6 +36,8 @@ function ReferAFriend() {
    
     } catch (error) {
       console.error('Error:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -54,7 +59,11 @@ function ReferAFriend() {
           <form onSubmit={handleSubmit}>
             <InputField value={newCustomerEmail} onChange={(e) => setNewCustomerEmail(e.target.value)} />
             <div className='ButtonContainer'>
-              <Button type="submit" variant="contained" color="success">Submit</Button>
+              {loading ? (
+                  <LoadingSpinner />
+              ) : (
+                  <Button type="submit" variant="contained" color="success">Submit</Button>
+              )}
             </div>
           </form>
         )}

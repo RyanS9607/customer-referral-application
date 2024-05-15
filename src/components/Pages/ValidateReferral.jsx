@@ -4,6 +4,7 @@ import InputField from '../InputField/InputField';
 import Button from '@mui/material/Button';
 import Success from '../ResponseHandling/Success';
 import Error from '../ResponseHandling/Error';
+import LoadingSpinner from "../InputField/LoadingSpinner";
 
 function ValidateReferral() {
   
@@ -11,9 +12,11 @@ function ValidateReferral() {
   const [newCustomerEmail] = useState('ryans6atfc@gmail.com'); 
   const [responseText, setResponseText] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
+    setLoading(true);
 
     try {
       const response = await axios({
@@ -36,6 +39,8 @@ function ValidateReferral() {
 
     } catch (error) {
       console.error('Error:', error); 
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -57,7 +62,11 @@ function ValidateReferral() {
         <form onSubmit={handleSubmit}>
           <InputField value={referrersEmail} onChange={(e) => setReferrersEmail(e.target.value)} />
           <div className='ButtonContainer'>
-            <Button type='submit' variant="contained" color="success">Submit</Button>
+            {loading ? (
+                <LoadingSpinner />
+            ) : (
+                <Button type="submit" variant="contained" color="success">Submit</Button>
+            )}
           </div>
         </form>
         )}

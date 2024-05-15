@@ -153,7 +153,7 @@ form {
 }
 
 .Inputbox{
-  width: 500px;
+  width: 80%;
 }
 
 .errorButtons {
@@ -162,7 +162,7 @@ form {
 }
 
 .ImageContainer{
-  max-width: 100%
+  max-width: 70%
 }
 
 .ImageContainer img {
